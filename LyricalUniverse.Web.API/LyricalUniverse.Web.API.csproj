@@ -21,6 +21,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LyricalUniverse.Data\LyricalUniverse.Data.csproj" />
+    <ProjectReference Include="..\LyricalUniverse.Manager\LyricalUniverse.Manager.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,9 @@
 using LyricalUniverse.Data;
+using LyricalUniverse.Data.Albums.Concrete;
+using LyricalUniverse.Data.Albums.Interface;
+using LyricalUniverse.Data.Repository;
+using LyricalUniverse.Manager.Albums.Concrete;
+using LyricalUniverse.Manager.Albums.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +42,10 @@ namespace LyricalUniverse.Web.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LyricalUniverse.Web.API", Version = "v1" });
             });
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IAlbumRepository, AlbumRepository>();
+            services.AddTransient<IAlbumManager, AlbumManager>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
