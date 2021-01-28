@@ -1,3 +1,4 @@
+using AutoMapper;
 using LyricalUniverse.Data;
 using LyricalUniverse.Data.Albums.Concrete;
 using LyricalUniverse.Data.Albums.Interface;
@@ -45,6 +46,7 @@ namespace LyricalUniverse.Web.API
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IAlbumRepository, AlbumRepository>();
             services.AddTransient<IAlbumManager, AlbumManager>();
+            services.AddAutoMapper(typeof(Startup));
 
         }
 
@@ -57,9 +59,8 @@ namespace LyricalUniverse.Web.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LyricalUniverse.Web.API v1"));
             }
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

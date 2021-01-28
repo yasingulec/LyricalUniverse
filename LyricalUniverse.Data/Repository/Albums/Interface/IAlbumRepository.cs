@@ -10,6 +10,6 @@ namespace LyricalUniverse.Data.Albums.Interface
 {
     public interface IAlbumRepository:IGenericRepository<Album>
     {
- 
+        Task<Album> GetAlbumByNameAsync(string name);
     }
 }
