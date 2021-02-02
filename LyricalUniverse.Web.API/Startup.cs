@@ -5,19 +5,14 @@ using LyricalUniverse.Data.Albums.Interface;
 using LyricalUniverse.Data.Repository;
 using LyricalUniverse.Manager.Albums.Concrete;
 using LyricalUniverse.Manager.Albums.Interface;
+using LyricalUniverse.Web.API.FileHelper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LyricalUniverse.Web.API
 {
@@ -46,6 +41,7 @@ namespace LyricalUniverse.Web.API
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IAlbumRepository, AlbumRepository>();
             services.AddTransient<IAlbumManager, AlbumManager>();
+            services.AddTransient<IFileManager, FileManager>();
             services.AddAutoMapper(typeof(Startup));
 
         }
