@@ -76,19 +76,32 @@ namespace LyricalUniverse.Web.API.Controllers
                     Name=albumModel.Name,
                     ReleaseDate=albumModel.ReleaseDate,
                 };
-                //albumModel.ImagePath=_fileManager.SaveImage()
                 await _albumManager.AddAsync(album);
                 return CreatedAtAction("AddAlbum", album);
             }
             return BadRequest();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateAlbum(Album albumModel)
+        public async Task<IActionResult> UpdateAlbum([FromForm]AlbumUpdateModel albumModel)
         {
             if (albumModel.Id > 0)
             {
                 var album = await _albumManager.GetAsync(albumModel.Id);
-                _mapper.Map<Album, AlbumModel>(albumModel);
+           
+                if (albumModel.Image==null)
+                {
+                    albumModel.ImagePath = album.ImagePath;                
+                }
+
+                if (album.ImagePath != albumModel.ImagePath)
+                {
+                    _fileManager.RemoveImage(album.ImagePath);
+                    album.ImagePath = _fileManager.SaveImage(albumModel.Image);
+                }
+
+                album.Name = albumModel.Name;
+                album.Description = albumModel.Description;
+                album.ReleaseDate = albumModel.ReleaseDate;
                 await _albumManager.UpdateAsync(album);
                 return Ok(album);
             }
@@ -96,6 +109,12 @@ namespace LyricalUniverse.Web.API.Controllers
             {
                 return BadRequest();
             }
+        }
+        [HttpGet("{image}")]
+        public IActionResult Image(string image)
+        {
+            var mime = image.Substring(image.LastIndexOf(".") + 1);
+            return new FileStreamResult(_fileManager.imageStream(image), $"image/{mime}");
         }
     }
 }
