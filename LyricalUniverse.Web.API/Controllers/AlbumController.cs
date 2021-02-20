@@ -88,11 +88,9 @@ namespace LyricalUniverse.Web.API.Controllers
             {
                 var album = await _albumManager.GetAsync(albumModel.Id);
            
-                if (albumModel.Image==null)
-                {
+                if (albumModel.Image==null)               
                     albumModel.ImagePath = album.ImagePath;                
-                }
-
+                
                 if (album.ImagePath != albumModel.ImagePath)
                 {
                     _fileManager.RemoveImage(album.ImagePath);

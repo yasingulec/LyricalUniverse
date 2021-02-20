@@ -14,7 +14,6 @@ namespace LyricalUniverse.Web.API.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
-        public string CurrentImage { get; set; }
         public DateTime ReleaseDate { get; set; }
         [DataType(DataType.Upload)]
         [AllowedExtensions(new string[] { ".jpg", ".png", ".jpeg", ".gif" })]

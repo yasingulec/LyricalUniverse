@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace LyricalUniverse.Data
 {
-   public class LyricalUniverseDbContext:DbContext
+    public class LyricalUniverseDbContext : DbContext
     {
-        public LyricalUniverseDbContext(DbContextOptions<LyricalUniverseDbContext> options):base(options)
+        public LyricalUniverseDbContext(DbContextOptions<LyricalUniverseDbContext> options) : base(options)
         {
 
         }
 
         public DbSet<Album> Albums { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
