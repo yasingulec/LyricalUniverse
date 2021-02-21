@@ -4,14 +4,16 @@ using LyricalUniverse.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LyricalUniverse.Data.Migrations
 {
     [DbContext(typeof(LyricalUniverseDbContext))]
-    partial class LyricalUniverseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210221155022_AuthenticationAdded")]
+    partial class AuthenticationAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

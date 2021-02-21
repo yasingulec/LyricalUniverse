@@ -9,5 +9,6 @@ namespace LyricalUniverse.Data.Repository.Users.Interface
 {
    public interface IUserRepository:IGenericRepository<User>
     {
+        Task<User> Authenticate(string userName, string password);
     }
 }

@@ -21,6 +21,12 @@ namespace LyricalUniverse.Manager.Users.Concrete
            await _repo.AddAsync(entity);
         }
 
+        public Task<User> Authenticate(string userName, string password)
+        {
+            var user = _repo.Authenticate(userName, password);
+            return user;
+        }
+
         public async Task DeleteAsync(int id)
         {
             await _repo.DeleteAsync(id);

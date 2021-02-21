@@ -8,7 +8,6 @@ namespace LyricalUniverse.Entities
     {
         [Required(ErrorMessage = "Bu alan boş geçilemez.")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Bu alan boş geçilemez.")]
         public string Description { get; set; }
         public string ImagePath { get; set; }
         [Required(ErrorMessage ="Bu alan boş geçilemez.")]

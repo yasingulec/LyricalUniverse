@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace LyricalUniverse.Entities
 {
-    public class User:BaseEntity
+    public class Role:BaseEntity
     {
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string ImagePath { get; set; }
+        public string Name { get; set; }
         public List<UserRole> UserRoles { get; set; }
 
     }

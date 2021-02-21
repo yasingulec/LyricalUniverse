@@ -3,12 +3,14 @@ using LyricalUniverse.Entities;
 using LyricalUniverse.Manager.Albums.Interface;
 using LyricalUniverse.Web.API.FileHelper;
 using LyricalUniverse.Web.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LyricalUniverse.Web.API.Controllers
 {
+    [Authorize(Roles ="Admin")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class AlbumController : ControllerBase
@@ -22,6 +24,7 @@ namespace LyricalUniverse.Web.API.Controllers
             _mapper = mapper;
             _fileManager = fileManager;
         }
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAlbums()
         {
@@ -29,6 +32,7 @@ namespace LyricalUniverse.Web.API.Controllers
             var albumModel = _mapper.Map<List<AlbumModel>>(albums);
             return Ok(albumModel);
         }
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAlbum(int id)
         {
@@ -40,6 +44,7 @@ namespace LyricalUniverse.Web.API.Controllers
             var albumModel = _mapper.Map<AlbumModel>(album);
             return Ok(albumModel);
         }
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAlbumByName(string name)
         {
@@ -108,6 +113,7 @@ namespace LyricalUniverse.Web.API.Controllers
                 return BadRequest();
             }
         }
+        [AllowAnonymous]
         [HttpGet("{image}")]
         public IActionResult Image(string image)
         {
