@@ -13,6 +13,7 @@ namespace LyricalUniverse.Web.API.AutoMapper
         public AutoMapper()
         {
             CreateMap<Album, AlbumModel>();
+            CreateMap<User, UserViewModel>();
         }
     }
 }
