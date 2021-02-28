@@ -10,6 +10,7 @@ using LyricalUniverse.Manager.Albums.Interface;
 using LyricalUniverse.Manager.Users.Concrete;
 using LyricalUniverse.Manager.Users.Interface;
 using LyricalUniverse.Web.API.FileHelper;
+using LyricalUniverse.Web.API.FileHelper.UserFileManager;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -62,6 +63,7 @@ namespace LyricalUniverse.Web.API
             services.AddTransient<IAlbumRepository, AlbumRepository>();
             services.AddTransient<IAlbumManager, AlbumManager>();
             services.AddTransient<IFileManager, FileManager>();
+            services.AddTransient<IUserFileManager, UserFileManager>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
             services.AddAutoMapper(typeof(Startup));
