@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace LyricalUniverse.Web.API.Controllers
@@ -69,14 +70,15 @@ namespace LyricalUniverse.Web.API.Controllers
                 {
                     var user = new User
                     {
-                        ImagePath = _fileManager.SaveImage(ucm.Image),
+                        ImagePath = ucm.Image==null?ucm.ImagePath=null: _fileManager.SaveImage(ucm.Image),
                         Email = ucm.Email,
                         UserName = ucm.UserName,
                         Password = ucm.Password
                     };
+
                     await _userManager.AddAsync(user);
                     response.isSuccess = true;
-                    response.Message = "Kayıt başarılı bir şekilde eklendi.";
+                    response.Message = "Record added successfully.";
 
                 }
                 catch (Exception ex)
@@ -88,6 +90,57 @@ namespace LyricalUniverse.Web.API.Controllers
                 }
             }
             return Ok(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser([FromForm] UserCreateUpdateModel um)
+        {
+            Response<UserCreateUpdateModel> userResponse = new Response<UserCreateUpdateModel>();
+           
+            if (um.Id > 0)
+            {
+                var user = await _userManager.GetAsync(um.Id);
+
+
+                if (String.IsNullOrEmpty(user.ImagePath)&& um.Image!=null)
+                {
+                    user.ImagePath = _fileManager.SaveImage(um.Image);
+                }
+
+                if (um.Image == null && user.ImagePath!=null)
+                    um.ImagePath = user.ImagePath;
+
+                if (user.ImagePath != um.ImagePath)
+                {
+                    _fileManager.RemoveImage(user.ImagePath);
+                    user.ImagePath = _fileManager.SaveImage(um.Image);
+                }
+
+                user.UserName = um.UserName;
+                user.Password = um.Password;
+                user.Email = um.Email;
+                await _userManager.UpdateAsync(user);
+                userResponse.isSuccess = true;
+                userResponse.Message = "Record updated successfully.";
+                return Ok(userResponse);
+            }
+            else
+            {
+                userResponse.isSuccess = false;
+                userResponse.Message = "Your transaction could not be executed.";
+                return BadRequest(userResponse);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var user = await _userManager.GetAsync(id);
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user.Id);
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

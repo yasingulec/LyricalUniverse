@@ -3,10 +3,14 @@ using LyricalUniverse.Data;
 using LyricalUniverse.Data.Albums.Concrete;
 using LyricalUniverse.Data.Albums.Interface;
 using LyricalUniverse.Data.Repository;
+using LyricalUniverse.Data.Repository.Tracks.Concrete;
+using LyricalUniverse.Data.Repository.Tracks.Interface;
 using LyricalUniverse.Data.Repository.Users.Concrete;
 using LyricalUniverse.Data.Repository.Users.Interface;
 using LyricalUniverse.Manager.Albums.Concrete;
 using LyricalUniverse.Manager.Albums.Interface;
+using LyricalUniverse.Manager.Tracks.Concrete;
+using LyricalUniverse.Manager.Tracks.Interface;
 using LyricalUniverse.Manager.Users.Concrete;
 using LyricalUniverse.Manager.Users.Interface;
 using LyricalUniverse.Web.API.FileHelper;
@@ -66,6 +70,8 @@ namespace LyricalUniverse.Web.API
             services.AddTransient<IUserFileManager, UserFileManager>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<ITrackRepository, TrackRepository>();
+            services.AddTransient<ITrackManager, TrackManager>();
             services.AddAutoMapper(typeof(Startup));
 
         }

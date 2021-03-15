@@ -5,6 +5,7 @@ using LyricalUniverse.Web.API.FileHelper;
 using LyricalUniverse.Web.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -92,8 +93,14 @@ namespace LyricalUniverse.Web.API.Controllers
             if (albumModel.Id > 0)
             {
                 var album = await _albumManager.GetAsync(albumModel.Id);
-           
-                if (albumModel.Image==null)               
+
+
+                if (String.IsNullOrEmpty(album.ImagePath) && albumModel.Image != null)
+                {
+                    album.ImagePath = _fileManager.SaveImage(albumModel.Image);
+                }
+
+                if (albumModel.Image==null && album.ImagePath != null)               
                     albumModel.ImagePath = album.ImagePath;                
                 
                 if (album.ImagePath != albumModel.ImagePath)

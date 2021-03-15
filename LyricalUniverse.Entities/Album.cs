@@ -1,5 +1,6 @@
 ﻿using LyricalUniverse.Core;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace LyricalUniverse.Entities
@@ -12,5 +13,6 @@ namespace LyricalUniverse.Entities
         public string ImagePath { get; set; }
         [Required(ErrorMessage ="Bu alan boş geçilemez.")]
         public DateTime ReleaseDate { get; set; }
+        public List<Track> Track { get; set; }
     }
 }

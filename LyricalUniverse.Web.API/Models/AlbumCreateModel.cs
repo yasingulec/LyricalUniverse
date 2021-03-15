@@ -13,6 +13,7 @@ namespace LyricalUniverse.Web.API.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime ReleaseDate { get; set; }
+        [Required]
         [DataType(DataType.Upload)]
         [AllowedExtensions(new string[] { ".jpg", ".png", ".jpeg", ".gif" })]
         [MaxFileSize(5 * 1024 * 1024)]
